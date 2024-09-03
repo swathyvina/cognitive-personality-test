@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptability Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; 
+            margin: 0;
+            padding: 0;
+            background-image: url("image\bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .navbar {
+            background-color: #ffffff;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1em;
+            font-weight: bold;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo img {
+            height: 40px;
+            margin-right: 0.5em;
+        }
+        .main-content {
+            background-image: url("image\bg.jpg"); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 2em auto;
+            max-width: 800px;
+            box-shadow: 0 0 10px rgba(227, 90, 206, 0.1);
+            display: flex;
+            flex-direction: row;
+            padding: 2em;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .text-container {
+            max-width: 400px;
+            margin-left: 2em;
+        }
+        .text-container h2 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        .text-container p {
+            font-size: 1.2em;
+            margin-bottom: 2em;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+        }
+        .buttons button {
+            padding: 1em 2em;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .buttons .main-action {
+            background-color: #8658cf;
+            color: white;
+        }
+        .buttons .secondary-action {
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="image/logo.jpg" alt="Logo">
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="image-container">
+            <img src="image\adapt.jpeg" alt="Adaptability Test Image">
+        </div>
+        <div class="text-container">
+            <h2>Test Your Adaptability Skills</h2>
+            <p><i>Take our adaptability test to assess your ability to adjust to new situations and changes.</i></p>
+            <p><i>Answer five questions to challenge your adaptability skills.</i></p>
+            <div class="buttons">
+                <a href="adaptabilitytest.html">
+                    <button class="main-action">Start Your Adaptability Test</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

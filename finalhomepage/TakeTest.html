@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Test Information</title>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .navbar {
+            background-color: white;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #8658cf;
+            text-decoration: none;
+            margin: 0 1em;
+            font-weight: bold;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            height: 40px;
+            margin-right: 0.5em;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 6em auto 2em;
+            padding: 2em;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slideIn 1s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5em;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #8658cf;
+            width: 100%;
+            margin: 0;
+        }
+
+        .instructions, .section {
+            width: 100%;
+            max-width: 800px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5em;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .instructions h2, .section h2 {
+            color: #8658cf;
+            margin-top: 0;
+        }
+
+        .instructions ul, .section ul {
+            text-align: left;
+            list-style-type: disc;
+            padding-left: 1.5em;
+            margin: 0;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .buttons button {
+            padding: 1em;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .buttons .start-test {
+            background-color: #8658cf;
+            color: white;
+        }
+
+        .buttons .back-home {
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+
+        .buttons button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="image/logo.jpg" alt="Logo">
+        </div>
+    </div>
+    <div class="container">
+        <h1>Cognitive Test</h1>
+        <div class="instructions">
+            <h2>Instructions for Attending the Test</h2>
+            <p>Welcome to the cognitive test. Please read the instructions carefully before starting the test:</p>
+            <ul>
+                <li>Ensure you are in a quiet environment to concentrate on the test.</li>
+                <li>The test consists of three sections: Empathy, Adaptability, and Communication.</li>
+                <li>Each section has 5 questions, and each question is rated on a scale from 1 to 5.</li>
+                <li>Once you complete a section, you cannot go back and change your answers.</li>
+                <li>Your final score will be calculated based on your responses across all sections.</li>
+            </ul>
+            <p>Good luck!</p>
+        </div>
+        <div class="section">
+            <h2>Scoring Methodology</h2>
+            <p>Each question is to be rated on a scale from 1 to 5:</p>
+            <ul>
+                <li>1 = Strongly Disagree</li>
+                <li>2 = Disagree</li>
+                <li>3 = Neutral</li>
+                <li>4 = Agree</li>
+                <li>5 = Strongly Agree</li>
+            </ul>
+            <p>Your score for each section is the sum of your responses.</p>
+        </div>
+        
+        <div class="buttons">
+            <button class="back-home" onclick="window.location.href='newindex.html';">Back to Home</button>
+            <button class="start-test" onclick="window.location.href='empathy.html';">Take Test</button>
+        </div>
+    </div>
+</body>
+</html>

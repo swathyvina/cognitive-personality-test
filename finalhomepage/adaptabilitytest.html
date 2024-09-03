@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empathy Self-Assessment</title>
+<style>
+   body {
+       font-family: Arial, sans-serif;
+       line-height: 1.6;
+       margin: 0;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       min-height: 100vh; /* Ensure full viewport height */
+       background-color: #f0f0f0; /* Optional: Add a background color */
+   }
+   #questionnaire {
+       width: 90%; /* Adjust the width as needed */
+       max-width: 800px; /* Set maximum width */
+       background-color: #ffffff;
+       padding: 30px;
+       border-radius: 8px;
+       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+   }
+   .question {
+       margin-bottom: 30px;
+   }
+   .options label {
+       display: block;
+       margin-bottom: 15px;
+   }
+   .btn {
+       background-color:#8658cf; /* Light violet */
+       color: white;
+       padding: 12px 24px;
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       font-size: 16px;
+       margin-right: 10px;
+       cursor: pointer;
+       border: none;
+       border-radius: 5px;
+   }
+   .btn-back {
+       background-color: #808080; /* Grey */
+   }
+   .btn-submit {
+       background-color:#8658cf; /* Light violet */
+   }
+   h2 {
+       text-align: center;
+       background-color: #8658cf; /* Light violet */
+       color: white;
+       padding: 10px;
+       border-radius: 5px;
+       margin-top: 0;
+   }
+</style>
+</head>
+<body>
+
+<div id="questionnaire">
+   <div class="question" id="q1">
+       <h2>Adaptability Self-Assessment</h2>
+       <p>1. I embrace change and see it as an opportunity for growth.</p>
+       <div class="options">
+        <label><input type="radio" name="q1" value="1"> Strongly Disagree</label>
+        <label><input type="radio" name="q1" value="2"> Disagree</label>
+        <label><input type="radio" name="q1" value="3"> Neutral</label>
+        <label><input type="radio" name="q1" value="4"> Agree</label>
+        <label><input type="radio" name="q1" value="5"> Strongly Agree</label>
+       </div>
+       <button class="btn btn-next" onclick="nextQuestion('q1')">Next</button>
+   </div>
+
+   <div class="question" id="q2" style="display: none;">
+       <h2>Adaptability Self-Assessment</h2>
+       <p>2. I quickly adjust my plans when circumstances change</p>
+       <div class="options">
+        <label><input type="radio" name="q2" value="1"> Strongly Disagree</label>
+        <label><input type="radio" name="q2" value="2"> Disagree</label>
+        <label><input type="radio" name="q2" value="3"> Neutral</label>
+        <label><input type="radio" name="q2" value="4"> Agree</label>
+        <label><input type="radio" name="q2" value="5"> Strongly Agree</label>
+       </div>
+       <button class="btn btn-back" onclick="prevQuestion('q2')">Back</button>
+       <button class="btn btn-next" onclick="nextQuestion('q2')">Next</button>
+   </div>
+
+   <div class="question" id="q3" style="display: none;">
+       <h2>Adaptability Self-Assessment</h2>
+       <p>3. I am open to new ideas and approaches.</p>
+       <div class="options">
+        <label><input type="radio" name="q3" value="1"> Strongly Disagree</label>
+        <label><input type="radio" name="q3" value="2"> Disagree</label>
+        <label><input type="radio" name="q3" value="3"> Neutral</label>
+        <label><input type="radio" name="q3" value="4"> Agree</label>
+        <label><input type="radio" name="q3" value="5"> Strongly Agree</label>
+       </div>
+       <button class="btn btn-back" onclick="prevQuestion('q3')">Back</button>
+       <button class="btn btn-next" onclick="nextQuestion('q3')">Next</button>
+   </div>
+
+   <div class="question" id="q4" style="display: none;">
+       <h2>Adaptability Self-Assessment</h2>
+       <p>4. I handle unexpected challenges calmly and effectively..</p>
+       <div class="options">
+        <label><input type="radio" name="q4" value="1"> Strongly Disagree</label>
+        <label><input type="radio" name="q4" value="2"> Disagree</label>
+        <label><input type="radio" name="q4" value="3"> Neutral</label>
+        <label><input type="radio" name="q4" value="4"> Agree</label>
+        <label><input type="radio" name="q4" value="5"> Strongly Agree</label>
+       </div>
+       <button class="btn btn-back" onclick="prevQuestion('q4')">Back</button>
+       <button class="btn btn-next" onclick="nextQuestion('q4')">Next</button>
+   </div>
+
+   <div class="question" id="q5" style="display: none;">
+       <h2>Adaptability Self-Assessment</h2>
+       <p>5. I seek out new experiences to broaden my perspective.</p>
+       <div class="options">
+        <label><input type="radio" name="q5" value="1"> Strongly Disagree</label>
+        <label><input type="radio" name="q5" value="2"> Disagree</label>
+        <label><input type="radio" name="q5" value="3"> Neutral</label>
+        <label><input type="radio" name="q5" value="4"> Agree</label>
+        <label><input type="radio" name="q5" value="5"> Strongly Agree</label>
+       </div>
+       <button class="btn btn-back" onclick="prevQuestion('q5')">Back</button>
+       <button class="btn btn-submit" onclick="submitForm()">Submit</button>
+   </div>
+</div>
+
+<script>
+    function nextQuestion(currentQuestion) {
+        var radios = document.getElementsByName(currentQuestion);
+        var isAnswered = false;
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                isAnswered = true;
+                break;
+            }
+        }
+        if (!isAnswered) {
+            alert("Please answer the question before proceeding.");
+            return;
+        }
+        document.getElementById(currentQuestion).style.display = 'none';
+        var nextQuestionNum = parseInt(currentQuestion.substring(1)) + 1;
+        var nextQuestionId = 'q' + nextQuestionNum;
+        if (document.getElementById(nextQuestionId)) {
+            document.getElementById(nextQuestionId).style.display = 'block';
+        }
+    }
+
+    function prevQuestion(currentQuestion) {
+        document.getElementById(currentQuestion).style.display = 'none';
+        var prevQuestionNum = parseInt(currentQuestion.substring(1)) - 1;
+        var prevQuestionId = 'q' + prevQuestionNum;
+        if (document.getElementById(prevQuestionId)) {
+            document.getElementById(prevQuestionId).style.display = 'block';
+        }
+    }
+
+    function submitForm() {
+        var radios;
+        var isAnswered = true;
+        for (var i = 1; i <= 5; i++) {
+            radios = document.getElementsByName('q' + i);
+            var answered = false;
+            for (var j = 0; j < radios.length; j++) {
+                if (radios[j].checked) {
+                    answered = true;
+                    break;
+                }
+            }
+            if (!answered) {
+                isAnswered = false;
+                alert("Please answer all the questions before submitting.");
+                break;
+            }
+        }
+        if (isAnswered) {
+            alert('Form submitted successfully!');
+            // Redirect to the next page
+            window.location.href = 'communication.html'; // Replace 'next_page.html' with your target URL
+        }
+    }
+ </script>
+
+ </body>
+ </html>

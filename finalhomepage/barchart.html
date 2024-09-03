@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Assessment Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #8658cf;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #8658cf;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #6e45a1;
+        }
+
+        .results {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #chart-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Self-Assessment Results</h2>
+        <button id="generate-btn" class="btn">Generate Results</button>
+        <div id="results" class="hidden">
+            <div id="empathy-result"></div>
+            <div id="adaptability-result"></div>
+            <div id="communication-result"></div>
+            <div id="chart-container">
+                <canvas id="results-chart"></canvas>
+            </div>
+            <button id="download-btn" class="btn">Download as PDF</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const generateBtn = document.getElementById('generate-btn');
+        const downloadBtn = document.getElementById('download-btn');
+        const resultsContainer = document.getElementById('results');
+        const scores = {
+            Empathy: 0,
+            Adaptability: 0,
+            Communication: 0
+        };
+
+        generateBtn.addEventListener('click', () => {
+            scores.Empathy = Math.floor(Math.random() * 21) + 5; // Random score between 5 and 25
+            scores.Adaptability = Math.floor(Math.random() * 21) + 5;
+            scores.Communication = Math.floor(Math.random() * 21) + 5;
+
+            displayResults(scores);
+            resultsContainer.classList.remove('hidden');
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const chartCanvas = document.getElementById('results-chart');
+            const chartDataURL = chartCanvas.toDataURL('image/png');
+
+            doc.setFontSize(16);
+            doc.text("Self-Assessment Results", 20, 20);
+
+            doc.setFontSize(12);
+            doc.text(`Empathy Score: ${scores.Empathy} - ${getNarrative('Empathy', scores.Empathy)}`, 20, 40);
+            doc.text(`Adaptability Score: ${scores.Adaptability} - ${getNarrative('Adaptability', scores.Adaptability)}`, 20, 60);
+            doc.text(`Communication Score: ${scores.Communication} - ${getNarrative('Communication', scores.Communication)}`, 20, 80);
+
+            doc.addImage(chartDataURL, 'PNG', 20, 100, 170, 80);
+
+            doc.save('self-assessment-results.pdf');
+        });
+
+        function displayResults(scores) {
+            document.getElementById('empathy-result').textContent = `Empathy Score: ${scores.Empathy} - ${getNarrative('Empathy', scores.Empathy)}`;
+            document.getElementById('adaptability-result').textContent = `Adaptability Score: ${scores.Adaptability} - ${getNarrative('Adaptability', scores.Adaptability)}`;
+            document.getElementById('communication-result').textContent = `Communication Score: ${scores.Communication} - ${getNarrative('Communication', scores.Communication)}`;
+
+            new Chart(document.getElementById('results-chart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['Empathy', 'Adaptability', 'Communication'],
+                    datasets: [{
+                        label: 'Scores',
+                        data: [scores.Empathy, scores.Adaptability, scores.Communication],
+                        backgroundColor: '#8658cf',
+                        borderColor: '#6e45a1',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function getNarrative(category, score) {
+            const narratives = {
+                Empathy: {
+                    21: "You are highly empathetic, understanding, and supportive. You are very aware of others' emotions and needs and respond with care and compassion.",
+                    16: "You have a good level of empathy. You generally understand and care about others' feelings but may occasionally miss subtle cues.",
+                    11: "Your empathy is average. You show concern for others but might not always fully understand their emotions or respond appropriately.",
+                    6: "You might struggle to understand and relate to others' feelings. You may need to work on being more attentive and responsive to the emotions of those around you.",
+                    5: "You have significant difficulty in understanding and relating to others' emotions. Developing greater emotional awareness and sensitivity could benefit your relationships."
+                },
+                Adaptability: {
+                    21: "You excel in adapting to new situations and changes. You are flexible, resilient, and thrive in dynamic environments.",
+                    16: "You are fairly adaptable and can handle changes well, though there may be times when you find adjustments challenging.",
+                    11: "Your adaptability is average. You manage changes adequately but may feel uncomfortable with significant or sudden shifts.",
+                    6: "You might find it challenging to adapt to new situations and changes. Working on being more open to new experiences could help improve your adaptability.",
+                    5: "You struggle significantly with adapting to change. Developing greater flexibility and resilience can help you navigate changes more effectively."
+                },
+                Communication: {
+                    21: "You have excellent communication skills. You express yourself clearly, listen well, and effectively resolve conflicts.",
+                    16: "Your communication skills are strong. You generally convey your thoughts well and are good at interacting with others.",
+                    11: "Your communication skills are average. You manage basic communication well but might need to improve in areas like feedback and conflict resolution.",
+                    6: "You may find it difficult to communicate effectively. Working on clarity, listening, and adaptability in your communication style could benefit you.",
+                    5: "You have significant difficulties with communication. Improving your skills in expressing thoughts and resolving conflicts could greatly benefit your interactions."
+                }
+            };
+
+            if (score >= 21) return narratives[category][21];
+            if (score >= 16) return narratives[category][16];
+            if (score >= 11) return narratives[category][11];
+            if (score >= 6) return narratives[category][6];
+            return narratives[category][5];
+        }
+    </script>
+</body>
+</html>

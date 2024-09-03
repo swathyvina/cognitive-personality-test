@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Raleway, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Raleway, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .screen {
+            width: 360px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .screen h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #8f84d2;
+            color: white;
+            margin: -20px -20px 20px -20px;
+        }
+
+        .screen__content {
+            padding: 20px;
+        }
+
+        .login__field {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .login__icon {
+            position: absolute;
+            top: 15px;
+            left: 10px;
+            color: #adadad;
+        }
+
+        .login__input {
+            width: 100%;
+            padding: 10px 35px;
+            border: 2px solid #adadad;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .login__input:focus {
+            border-color: #8f84d2;
+        }
+
+        .login__submit {
+            width: 100%;
+            height: 50px;
+            border: none;
+            background: #8f84d2;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login__submit:hover {
+            background-color: #6c5ecf;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .social-login {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-login h3 {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-login__icon {
+            font-size: 24px;
+            color: #8f84d2;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-login__icon:hover {
+            color: #6c5ecf;
+        }
+    </style>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent form from submitting traditionally
+
+            // Get email and password values
+            const email = document.querySelector('.login__input[type="text"]').value;
+            const password = document.querySelector('.login__input[type="password"]').value;
+            const errorMessage = document.querySelector('.error-message');
+
+            // Email validation regex
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Password validation (min 8 characters, 1 uppercase, 1 lowercase, 1 number)
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+            if (!emailPattern.test(email)) {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = "Please enter a valid email address.";
+                return; // Stop submission if email is invalid
+            }
+
+            if (!passwordPattern.test(password)) {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.";
+                return; // Stop submission if password doesn't meet the conditions
+            }
+
+            // If all validations pass, redirect to newindex.html
+            window.location.href = 'TakeTest.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="screen">
+            <h1>Login</h1>
+            <div class="screen__content">
+                <form class="login" onsubmit="handleLogin(event)">
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" class="login__input" placeholder="Email" required>
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" class="login__input" placeholder="Password" required>
+                    </div>
+                    <div class="error-message"></div>
+                    <button type="submit" class="login__submit">
+                        Log In
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

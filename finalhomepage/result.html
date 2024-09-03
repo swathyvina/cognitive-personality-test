@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .navbar {
+            background-color: #000;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1em;
+            font-weight: bold;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .logo img {
+            height: 40px;
+            margin-right: 0.5em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 2em;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+        .score-section {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2em;
+        }
+        .score-card {
+            background-color: #f7f7f7;
+            padding: 1em;
+            border-radius: 10px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .score-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .score-card p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+        .overall-score {
+            background-color: #8658cf;
+            color: white;
+            padding: 1em;
+            border-radius: 10px;
+            margin-top: 1em;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .overall-score h2 {
+            font-size: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .overall-score p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Test Results</h1>
+        
+        <div class="score-section">
+            <div class="score-card">
+                <h2>Empathy-Score</h2>
+                <p>Score: <span id="empathy-score">0</span>/25</p>
+            </div>
+            <div class="score-card">
+                <h2>Adaptability-Score</h2>
+                <p>Score: <span id="adaptability-score">20</span>/25</p>
+            </div>
+            <div class="score-card">
+                <h2>Communication-Score</h2>
+                <p>Score: <span id="communication-score">18</span>/25</p>
+            </div>
+        </div>
+        
+
+        <form action="{% url 'download' %}" method="post">
+            <button type="submit" style="margin: 20px 0;">Download PDF</button>
+        </form>
+    </div>
+    <script>
+        // Replace these values with actual scores
+        const empathyScore = 21;
+        const adaptabilityScore = 20;
+        const communicationScore = 23;
+
+        // Update scores in the document
+        document.getElementById('empathy-score').textContent = empathyScore;
+        document.getElementById('adaptability-score').textContent = adaptabilityScore;
+        document.getElementById('communication-score.').textContent = communicationScore;
+        document.getElementById('-score').textContent = empathyScore + adaptabilityScore + communicationScore;
+    </script>
+</body>
+</html>
+

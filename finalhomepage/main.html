@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MindEnvision</title>
+    <meta property="og:title" content="MindEnvision" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <!-- Include CSS Files -->
+    <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200;300;400;500;600;700;800&amp;display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" />
+    <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./index.css" />
+
+    <style>
+        /* Base styles for light and dark modes */
+        body {
+            font-family: Inter, sans-serif;
+            font-size: 16px;
+            line-height: 1.15;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        /* Button styles */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #ffffff;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <header class="navbar81-container53 navbar81-root-class-name">
+        <header data-thq="thq-navbar" class="navbar81-navbar-interactive">
+            <img alt="Cognitive Test Activity" src="public/logo-200h.png" class="navbar81-image1" />
+            <div data-thq="thq-navbar-nav" class="navbar81-desktop-menu">
+                <nav class="navbar81-links3">
+                    <a href="empathy.html">
+                        <span>Empathy Test</span>
+                    </a>
+                    <a href="adaptability.html">
+                        <span>Adaptability Test</span>
+                    </a>
+                    <a href="communication.html" target="_blank" rel="noreferrer noopener">
+                        <span>Communication Test</span>
+                    </a>
+                    <div class="navbar81-link4-dropdown-trigger">
+                        <div class="navbar81-icon-container2">
+                            <div class="navbar81-container54"></div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="navbar81-buttons2">
+                    <button class="navbar81-action12 thq-button-filled thq-button-animated">
+                        <a href="signup.html">
+                            <span class="thq-body-small">Sign up/Login in</span>
+                        </a>
+                    </button>
+                    <button id="toggleMode" class="navbar81-action22 thq-button-outline thq-button-animated">
+                        <span class="thq-body-small">Switch to Dark Mode</span>
+                    </button>
+                </div>
+            </div>
+            <div data-thq="thq-burger-menu" class="navbar81-burger-menu">
+                <svg viewBox="0 0 1024 1024" class="navbar81-icon18">
+                    <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
+                </svg>
+            </div>
+            <div data-thq="thq-mobile-menu" class="navbar81-mobile-menu">
+                <div class="navbar81-nav">
+                    <div class="navbar81-top">
+                        <img alt="Cognitive Test Activity" src="public/logo-200h.png" class="navbar81-logo2" />
+                        <div data-thq="thq-close-menu" class="navbar81-close-menu">
+                            <svg viewBox="0 0 1024 1024" class="navbar81-icon20">
+                                <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <nav class="navbar81-links4">
+                        <a href="#empathy">
+                            <span class="home-text thq-body-small thq-link">Empathy Test</span>
+                        </a>
+                        <a href="#adaptability">
+                            <span class="home-text01 thq-body-small thq-link">Adaptability Test</span>
+                        </a>
+                        <a href="#communication">
+                            <span class="home-text02 thq-body-small thq-link">Communication Test</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </header>
+    <main>
+        <div class="hero17-header78">
+            <div class="hero17-column thq-section-max-width thq-section-padding">
+                <div class="hero17-content21">
+                    <h1>
+                        <span class="home-text16 thq-heading-1">Cognitive Test for Students</span>
+                    </h1>
+                    <p>
+                        <span class="home-text15 thq-body-large">
+                            MindEnvision is an advanced cognitive assessment platform designed to help students unlock their full potential. By offering a range of cognitive tests and insightful analysis, we aim to understand their cognitive strengths and areas for improvement, enhancing their academic journey and personal development.
+                        </span>
+                    </p>
+                </div>
+                <div class="hero17-actions3">
+                    <button class="thq-button-filled hero17-button1" onclick="TakeToTest()">
+                        <span class="home-text14 thq-body-small">Take the Test</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function TakeToTest() {
+            window.location.href = "TakeTest.html";
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('toggleMode');
+
+            // Check for saved theme preference in localStorage
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                document.body.classList.add(currentTheme);
+                toggleButton.textContent = currentTheme === 'dark-mode' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+            }
+
+            toggleButton.addEventListener('click', () => {
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                
+                if (isDarkMode) {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                    toggleButton.textContent = 'Switch to Dark Mode';
+                    localStorage.setItem('theme', 'light-mode');
+                } else {
+                    document.body.classList.remove('light-mode');
+                    document.body.classList.add('dark-mode');
+                    toggleButton.textContent = 'Switch to Light Mode';
+                    localStorage.setItem('theme', 'dark-mode');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

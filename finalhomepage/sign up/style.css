@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+html {
+    background: #f4f4f9;
+}
+
+.body-content {
+    padding-top: 10vh;
+}
+
+.container {
+    width: 350px;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 2px solid rgba(255, 255, 255, 0.049);
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 0 25px rgba(108, 94, 207, 0.2);
+}
+
+h2 {
+    color: #6c5ecf;
+    font-family: Raleway, sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item {
+    margin: 5px;
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.form-item input {
+    width: 150px;
+    height: 30px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    color: black;
+    text-align: left;
+    margin: 0 5px;
+    font-family: Raleway, sans-serif;
+}
+
+.form-item-email {
+    margin: 0 5px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item-email input {
+    height: 30px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    color: black;
+    text-align: left;
+    margin: 0 5px;
+    font-family: Raleway, sans-serif;
+}
+
+.form-item-password {
+    margin: 5px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item-password input {
+    height: 30px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    color: black;
+    text-align: left;
+    margin: 5px 5px;
+    font-family: Raleway, sans-serif;
+}
+
+.remember-box {
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #6c5ecf;
+    display: flex;
+}
+
+.remember-box a {
+    text-decoration: none;
+    color: #6c5ecf;
+    margin-left: 30px;
+}
+
+.remember-box a:hover {
+    color: grey;
+}
+
+.form-btns {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 10px 0;
+}
+
+.form-btns button {
+    margin: auto;
+    font-size: 20px;
+    padding: 5px 15px;
+    border: 0;
+    border-radius: 15px;
+    color: white;
+    background: #8f84d2;
+    width: 280px;
+    cursor: pointer;
+    font-family: Raleway, sans-serif;
+}
+
+.form-btns button:disabled {
+    background: #8f8b85 !important;
+    color: rgb(131, 120, 120) !important;
+    cursor: not-allowed;
+}
+
+.form-btns button:hover {
+    background: #6c5ecf;
+    color: white;
+}
+
+.options {
+    padding-top: 15px;
+    margin: auto;
+    color: #6c5ecf;
+    font-size: 13px;
+    font-family: Raleway, sans-serif;
+}
+
+.options a {
+    font-size: 13px;
+    color: #6c5ecf;
+}
+
+.options a:hover {
+    color: rgb(167, 165, 165);
+}
+
+p {
+    text-align: center;
+    font-size: 12px;
+    font-family: Raleway, sans-serif;
+    color: #6c5ecf;
+}

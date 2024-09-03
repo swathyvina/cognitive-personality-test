@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Assessment Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #8658cf;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .question input {
+            margin-right: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #8658cf;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #6e45a1;
+        }
+
+        .results {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Self-Assessment Questionnaire</h2>
+
+        <!-- Section Selector -->
+        <div id="section-selector">
+            <label for="section">Select Section:</label>
+            <select id="section">
+                <option value="Empathy">Empathy</option>
+                <option value="Adaptability">Adaptability</option>
+                <option value="Communication">Communication</option>
+            </select>
+            <button class="btn" id="start-btn">Start Section</button>
+        </div>
+
+        <!-- Questionnaire -->
+        <div id="questionnaire" class="hidden">
+            <h2 id="section-title"></h2>
+            <div id="questions-container"></div>
+            <button class="btn" id="submit-btn">Submit Section</button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden"></div>
+    </div>
+
+    <script>
+        const sectionSelector = document.getElementById('section-selector');
+        const questionnaire = document.getElementById('questionnaire');
+        const sectionTitle = document.getElementById('section-title');
+        const questionsContainer = document.getElementById('questions-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsDiv = document.getElementById('results');
+
+        const questions = {
+            "Empathy": [
+                "I actively listen to others and try to understand their feelings.",
+                "I can easily put myself in someone else's shoes.",
+                "I am sensitive to the moods and feelings of those around me.",
+                "I offer support and help when I see someone in distress.",
+                "I often think about how my actions affect others."
+            ],
+            "Adaptability": [
+                "I embrace change and see it as an opportunity for growth.",
+                "I quickly adjust my plans when circumstances change.",
+                "I am open to new ideas and approaches.",
+                "I handle unexpected challenges calmly and effectively.",
+                "I seek out new experiences to broaden my perspective."
+            ],
+            "Communication": [
+                "I clearly express my thoughts and ideas.",
+                "I effectively communicate in both verbal and written forms.",
+                "I actively seek feedback to improve my communication skills.",
+                "I adjust my communication style based on the audience.",
+                "I can resolve conflicts through effective communication."
+            ]
+        };
+
+        const scores = {
+            Empathy: 0,
+            Adaptability: 0,
+            Communication: 0
+        };
+
+        // Start section
+        document.getElementById('start-btn').addEventListener('click', () => {
+            const selectedSection = document.getElementById('section').value;
+            sectionSelector.classList.add('hidden');
+            questionnaire.classList.remove('hidden');
+            sectionTitle.textContent = `${selectedSection} Assessment`;
+            questionsContainer.innerHTML = '';
+            questions[selectedSection].forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <label>${question}</label><br>
+                    <input type="radio" name="q${index}" value="1"> Strongly Disagree
+                    <input type="radio" name="q${index}" value="2"> Disagree
+                    <input type="radio" name="q${index}" value="3"> Neutral
+                    <input type="radio" name="q${index}" value="4"> Agree
+                    <input type="radio" name="q${index}" value="5"> Strongly Agree
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+        });
+
+        // Submit section
+        submitBtn.addEventListener('click', () => {
+            const section = sectionTitle.textContent.split(' ')[0];
+            const inputs = document.querySelectorAll(`#questions-container input[type="radio"]:checked`);
+            if (inputs.length < 5) {
+                alert('Please answer all questions.');
+                return;
+            }
+
+            let sectionScore = 0;
+            inputs.forEach(input => {
+                sectionScore += parseInt(input.value);
+            });
+            scores[section] = sectionScore;
+
+            // Check if all sections are completed
+            if (Object.values(scores).some(score => score === 0)) {
+                sectionSelector.classList.remove('hidden');
+                questionnaire.classList.add('hidden');
+            } else {
+                const totalScore = Object.values(scores).reduce((acc, score) => acc + score, 0);
+                displayResults(totalScore);
+            }
+        });
+
+        // Display results
+        function displayResults(totalScore) {
+            questionnaire.classList.add('hidden');
+            resultsDiv.classList.remove('hidden');
+            resultsDiv.innerHTML = `
+                <h2>Assessment Results</h2>
+                <p>Empathy Score: ${scores.Empathy} - ${getNarrative('Empathy', scores.Empathy)}</p>
+                <p>Adaptability Score: ${scores.Adaptability} - ${getNarrative('Adaptability', scores.Adaptability)}</p>
+                <p>Communication Score: ${scores.Communication} - ${getNarrative('Communication', scores.Communication)}</p>
+                <h3>${getPersonalityType(totalScore)}</h3>
+            `;
+
+            // Send data to backend
+            fetch('http://localhost:3000/submit-results', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    empathyScore: scores.Empathy,
+                    adaptabilityScore: scores.Adaptability,
+                    communicationScore: scores.Communication,
+                    totalScore: totalScore
+                })
+            })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Get narrative based on score
+        function getNarrative(category, score) {
+            const narratives = {
+                Empathy: {
+                    21: "You are highly empathetic, understanding, and supportive. You are very aware of others' emotions and needs and respond with care and compassion.",
+                    16: "You have a good level of empathy. You generally understand and care about others' feelings but may occasionally miss subtle cues.",
+                    11: "Your empathy is average. You show concern for others but might not always fully understand their emotions or respond appropriately.",
+                    6: "You might struggle to understand and relate to others' feelings. You may need to work on being more attentive and responsive to the emotions of those around you.",
+                    5: "You have significant difficulty in understanding and relating to others' emotions. Developing greater emotional awareness and sensitivity could benefit your relationships."
+                },
+                Adaptability: {
+                    21: "You excel in adapting to new situations and changes. You are flexible, resilient, and thrive in dynamic environments.",
+                    16: "You are fairly adaptable and can handle changes well, though there may be times when you find adjustments challenging.",
+                    11: "Your adaptability is average. You manage changes adequately but may feel uncomfortable with significant or sudden shifts.",
+                    6: "You might find it challenging to adapt to new situations and changes. Working on being more open to new experiences could help improve your adaptability.",
+                    5: "You struggle significantly with adapting to change. Developing greater flexibility and resilience can help you navigate changes more effectively."
+                },
+                Communication: {
+                    21: "You have excellent communication skills. You express yourself clearly, listen well, and effectively resolve conflicts.",
+                    16: "Your communication skills are strong. You generally convey your thoughts well and are good at interacting with others.",
+                    11: "Your communication skills are average. You manage basic communication well but might need to improve in areas like feedback and conflict resolution.",
+                    6: "You may find it difficult to communicate effectively. Working on clarity, listening, and adaptability in your communication style could benefit you.",
+                    5: "You have significant difficulties with communication. Improving your skills in expressing thoughts and resolving conflicts could greatly benefit your interactions."
+                }
+            };
+
+            // Determine the narrative based on score
+            if (score >= 21) return narratives[category][21];
+            if (score >= 16) return narratives[category][16];
+            if (score >= 11) return narratives[category][11];
+            if (score >= 6) return narratives[category][6];
+            return narratives[category][5];
+        }
+
+        // Get personality type based on total score
+        function getPersonalityType(totalScore) {
+            if (totalScore >= 63) {
+                return "You are a well-rounded, highly empathetic, adaptable, and communicative individual.";
+            } else if (totalScore >= 48) {
+                return "You have strong attributes but with some areas for improvement.";
+            } else if (totalScore >= 33) {
+                return "You are moderately developed across these areas but may need to work on certain aspects.";
+            } else if (totalScore >= 18) {
+                return "You may find challenges in these areas and would benefit from significant development.";
+            } else {
+                return "You face considerable difficulties in these areas and should focus on improvement.";
+            }
+        }
+    </script>
+</body>
+</html>
